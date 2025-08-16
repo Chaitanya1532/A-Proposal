@@ -64,20 +64,24 @@
       position: fixed;
       left: 20px;
       bottom: 20px;
-      background-color: #81c784;
+      background: linear-gradient(135deg, #ff4081, #ff99cc); /* Romantic pink gradient */
+      color: white;
       font-size: 1.2rem;
       padding: 15px 25px;
       border: none;
-      border-radius: 5px;
+      border-radius: 50px; /* More rounded for softness */
       cursor: pointer;
       z-index: 1000;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s, box-shadow 0.3s;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+      animation: heartbeat 1.5s infinite; /* Heartbeat effect */
     }
 
     .next-btn:hover {
-      background-color: #66bb6a;
+      background: linear-gradient(135deg, #f50057, #ff66b2); /* Slightly darker on hover */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05); /* Slight scale-up on hover */
     }
 
     .hearts {
@@ -135,6 +139,15 @@
       to { opacity: 1; }
     }
 
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
     .fireworks {
       position: absolute;
       top: 0;
@@ -178,9 +191,9 @@
 
   <div class="message">
     <p>Dear,</p>
-    <p><strong>Mrunal… jabse tujhee dekha hai na, tabse meri duniya alag si lagti hai. <strong></p>
+    <p><strong>Mrunal… jabse tujhe dekha hai na, tabse meri duniya alag si lagti hai.</strong></p>
     <p>Tera muskurana, tera baat karna… sab kuch mere dil ko choo jaata hai. Filmon mein kehte hain na ki ek pal sab kuch badal deta hai… mere liye wo pal tha jab tu meri zindagi mein aayi.</p>
-    <p>Aaj main bas itna hi poochna chahta hoon… kya tu meri hero banegi? Mere har scene ki heroine… aur meri kahaani ka hamesha ke liye happy ending</p>
+    <p>Aaj main bas itna hi poochna chahta hoon… kya tu meri hero banegi? Mere har scene ki heroine… aur meri kahaani ka hamesha ke liye happy ending</p>
     <p>– Chaitanya ❤</p>
   </div>
 
@@ -229,7 +242,7 @@
       alert("That's okay! Maybe another time!");
     }
 
-    // Auto-play music on page load
+    // Auto-play music and trigger fireworks on page load
     window.addEventListener('load', () => {
       const music = document.getElementById('bgMusic');
       music.play().catch(e => {
@@ -240,6 +253,7 @@
           });
         }, { once: true });
       });
+      triggerFireworks(); // Trigger fireworks on page load
     });
   </script>
 </body>
