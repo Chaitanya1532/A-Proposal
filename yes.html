@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yay! It's a Yes!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #e6f3ff, #b3d4ff); /* Romantic whitish-blue gradient */
+      font-family: 'Poppins', sans-serif;
+      color: #333; /* Darker text for better contrast */
+      text-align: center;
+      overflow: hidden;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ff99cc" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto; /* Heart-shaped cursor */
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      margin-top: 50px;
+      animation: fadeIn 2s ease-in-out;
+      color: #2c5282; /* Deep blue for heading */
+      text-shadow: 0 0 10px rgba(255, 99, 132, 0.5); /* Glowing effect */
+    }
+
+    .message {
+      max-width: 600px;
+      margin: 30px auto;
+      font-size: 1.5rem;
+      line-height: 1.6;
+      animation: fadeIn 4s ease-in-out;
+      color: #2d3748; /* Slightly darker for readability */
+      text-shadow: 0 0 5px rgba(255, 99, 132, 0.3); /* Subtle glow */
+    }
+
+    .celebration {
+      font-size: 2rem;
+      color: #ffeb3b;
+      animation: bounce 1s infinite alternate;
+    }
+
+    .button-container {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ff4081, #ff99cc); /* Romantic pink gradient */
+      color: white;
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px; /* More rounded for softness */
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      margin: 10px;
+      transition: all 0.3s ease;
+      animation: heartbeat 1.5s infinite; /* Heartbeat effect */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #f50057, #ff66b2); /* Slightly darker on hover */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transform: scale(1.05); /* Slight scale-up on hover */
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff99cc; /* Soft pink hearts */
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff99cc;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    .petal {
+      position: absolute;
+      width: 10px;
+      height: 20px;
+      background-color: #ff6b6b; /* Rose petal color */
+      border-radius: 50% 50% 0 0;
+      animation: floatPetal 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatPetal {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ffeb3b;
+      border-radius: 50%;
+      opacity: 0;
+      animation: fireworkAnimation 2s forwards;
+    }
+
+    @keyframes fireworkAnimation {
+      0% { transform: scale(1); opacity: 0; }
+      100% { transform: scale(5) translateY(-200px); opacity: 0; }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkleAnimation 1s forwards;
+    }
+
+    @keyframes sparkleAnimation {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(3) translateY(-50px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Yay! It's a Yes!</h1>
+
+  <div class="message">
+    <p>Mrunal, I'm so happy you said YES! ❤ This is the beginning of something beautiful, and I can't wait to see where this journey takes us.</p>
+    <p>You are truly amazing, and I'm the luckiest guy in the world right now.</p>
+  </div>
+
+  <div class="celebration">
+    🎉🎉🎉
+  </div>
+
+  <div class="heart-animation">💖</div>
+
+  <audio id="bgMusic" loop autoplay>
+    <source src="https://chaitanya1532.github.io/A-Proposal/Chedkhaniyaan Video Song - Bandish Bandits Shankar Ehsaan Loy Amazon Original Aug 4.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="button-container">
+    <button class="btn" onclick="startThisJourney()">Let's Start This Journey!</button>
+    <button class="btn" onclick="goBack()">Go Back</button>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+  <div class="fireworks" id="fireworks"></div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+      document.getElementById('hearts').appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.animationDuration = 6 + Math.random() * 4 + "s";
+      document.getElementById('hearts').appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      }, 10000);
+    }
+
+    setInterval(createHeart, 300);
+    setInterval(createPetal, 500);
+
+    function triggerFireworks() {
+      const colors = ['#ffeb3b', '#ff6b6b', '#ff99cc', '#00ffff', '#ff00ff'];
+      for (let i = 0; i < 15; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        firework.style.left = Math.random() * 100 + 'vw';
+        firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        firework.style.animationDuration = '2s';
+        document.getElementById('fireworks').appendChild(firework);
+        
+        setTimeout(() => {
+          firework.remove();
+        }, 2000);
+      }
+    }
+
+    function createSparkles(x, y) {
+      const colors = ['#ffffff', '#ffeb3b', '#ff99cc'];
+      for (let i = 0; i < 10; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = x + (Math.random() * 20 - 10) + 'px';
+        sparkle.style.top = y + (Math.random() * 20 - 10) + 'px';
+        sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(sparkle);
+        
+        setTimeout(() => {
+          sparkle.remove();
+        }, 1000);
+      }
+    }
+
+    function startThisJourney() {
+      alert("Sanskruti, I can't wait for our future together!");
+      triggerFireworks();
+      const button = document.querySelector('.btn');
+      const rect = button.getBoundingClientRect();
+      createSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    // Auto-play music and trigger fireworks on page load
+    window.addEventListener('load', () => {
+      const music = document.getElementById('bgMusic');
+      music.play().catch(e => {
+        document.body.addEventListener('click', () => {
+          music.play().catch(err => {
+            console.log("Autoplay blocked:", err);
+          });
+        }, { once: true });
+      });
+      triggerFireworks();
+    });
+  </script>
+</body>
+</html>
